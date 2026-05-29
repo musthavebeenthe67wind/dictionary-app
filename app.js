@@ -6,6 +6,7 @@ const input = document.getElementById("input-word");
 const clearBtn = document.getElementById("clear-btn");
 
 
+// functions
 function searchWord() {
     let inputWord = document.getElementById("input-word").value;
     fetch(`${url}${inputWord}`)
@@ -71,6 +72,7 @@ function clearInput(){
 
 }
 
+// event listeners
 
 icon.addEventListener("click",()=> {
     searchWord();
@@ -86,6 +88,7 @@ input.addEventListener("keypress", function(e){
 })
 
 clearBtn.addEventListener("click",clearInput);
+
 
 
 
