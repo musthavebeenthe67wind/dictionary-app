@@ -11,9 +11,9 @@ function disableDarkmode() {
     localStorage.setItem('darkmode', null)
 }
 
-if(darkmode === "active") enableDarkmode();
+if (darkmode === "active") enableDarkmode();
 
-themeSwtich.addEventListener("click", ()=> {
+themeSwtich.addEventListener("click", () => {
     darkmode = localStorage.getItem('darkmode')
-    darkmode !== "active" ? enableDarkmode() : disableDarkmode()  
+    darkmode !== "active" ? enableDarkmode() : disableDarkmode()
 })

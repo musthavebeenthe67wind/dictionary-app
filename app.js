@@ -10,24 +10,24 @@ const clearBtn = document.getElementById("clear-btn");
 function searchWord() {
     let inputWord = document.getElementById("input-word").value;
     fetch(`${url}${inputWord}`)
-    .then((response) => response.json())
-    .then((data) => {
-        
-        let example = "No example available";
+        .then((response) => response.json())
+        .then((data) => {
 
-        data[0].meanings.forEach((meaning) => {
+            let example = "No example available";
 
-        meaning.definitions.forEach((definition) => {
+            data[0].meanings.forEach((meaning) => {
 
-                if(definition.example && example === "No example available"){
-                    example = definition.example;
-                }
+                meaning.definitions.forEach((definition) => {
+
+                    if (definition.example && example === "No example available") {
+                        example = definition.example;
+                    }
+
+                });
 
             });
 
-        });
-
-        result.innerHTML = `
+            result.innerHTML = `
         <div class="word">
                 <h2>${inputWord}</h2>
                 <button onClick = "playSound()">
@@ -50,18 +50,20 @@ function searchWord() {
             sound.setAttribute("src", `${data[0].phonetics[0].audio}`);
 
             result.classList.add("show");
-            
-    })
-    .catch( () => {
-        result.innerHTML = `<h3 class = "error" >Couldn't Find The Word</h3>`
-    })
+
+        })
+        .catch(() => {
+            result.classList.add("show");
+            result.innerHTML = `<h3 class = "error" >Word not found</h3>`
+        })
+
 }
 
 function playSound() {
     sound.play();
 }
 
-function clearInput(){
+function clearInput() {
 
     document.getElementById("input-word").value = "";
 
@@ -74,20 +76,21 @@ function clearInput(){
 
 // event listeners
 
-icon.addEventListener("click",()=> {
+icon.addEventListener("click", () => {
     searchWord();
     icon.classList.add('pop');
-    setTimeout(()=>{
+    setTimeout(() => {
         icon.classList.remove('pop')
-    },100);
+    }, 100);
 });
-input.addEventListener("keypress", function(e){
-    if(e.key === "Enter") {
+
+input.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
         searchWord()
     }
 })
 
-clearBtn.addEventListener("click",clearInput);
+clearBtn.addEventListener("click", clearInput);
 
 
 
